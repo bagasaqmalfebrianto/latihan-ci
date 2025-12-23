@@ -38,9 +38,15 @@ jobs:
       
       # Run as a mlflow project
       - name: Run mlflow project
+        working-directory: ./MLproject  # penting: pindah ke folder yang ada MLproject & modelling.py
         run: |
-          mlflow run MLproject --env-manager=local 
- 
+          mlflow run . --env-manager=local
+      - name: Upload mlruns as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mlruns
+          path: mlruns/ 
       # Save models to GitHub Repository
       - name: Save mlruns to repo
         run: |
