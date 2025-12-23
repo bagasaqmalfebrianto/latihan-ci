@@ -25,7 +25,7 @@ if __name__ == "__main__":
     n_estimators = int(sys.argv[1]) if len(sys.argv) > 1 else 505
     max_depth = int(sys.argv[2]) if len(sys.argv) > 2 else 37
  
-    with mlflow.start_run():
+   with mlflow.start_run(nested=True, run_name="CreditScoring-RF"):
         model = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth)
         model.fit(X_train, y_train)
  
